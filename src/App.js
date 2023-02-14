@@ -1,8 +1,7 @@
 import { Route, Routes } from "react-router-dom";
-import "./App.css";
+
 import "./categories.styles.scss";
-import CategoryItem from "./components/Directory-item/DirectoryItem";
-import Directory from "./components/Directory/Directory";
+
 import Home from "./pages/Home";
 
 import Navigation from "./routes/Navigation";

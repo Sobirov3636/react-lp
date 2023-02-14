@@ -24,6 +24,7 @@ const getButton = (buttonType = BUTTON_TYPE_CLASSES.base) =>
   }[buttonType]);
 const Button = ({ children, buttonTpye, ...otherprops }) => {
   const CustumButton = getButton(buttonTpye);
+  console.log({ ...otherprops });
 
   return <CustumButton {...otherprops}>{children}</CustumButton>;
 };

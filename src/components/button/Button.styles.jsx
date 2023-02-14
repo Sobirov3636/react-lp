@@ -8,8 +8,8 @@ export const BaseButton = styled.button`
   line-height: 50px;
   padding: 0 35px 0 35px;
   font-size: 15px;
-  background-color: black;
-  color: white;
+  background-color: ${({ theme }) => theme.colors.color};
+  color: ${({ theme }) => theme.colors.background};
   text-transform: uppercase;
   font-family: inherit;
   font-weight: bolder;

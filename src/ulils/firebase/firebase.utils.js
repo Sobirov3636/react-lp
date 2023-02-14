@@ -63,11 +63,13 @@ export const createUserDocumentFromAuth = async (userAuth, addationalInfo = {}) 
 };
 
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
-  if (!email || !password) return createUserWithEmailAndPassword(auth, email, password);
+  if (!email || !password) return;
+  return await createUserWithEmailAndPassword(auth, email, password);
 };
 
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
-  if (!email || !password) return signInWithEmailAndPassword(auth, email, password);
+  if (!email || !password) return;
+  return await signInWithEmailAndPassword(auth, email, password);
 };
 
 export const signOutUser = async () => await signOut(auth);
@@ -88,9 +90,9 @@ export const addCollectionAndDocuments = async function (collectionKey, objectsT
 };
 
 export const getCategoriesAndDocuments = async function () {
-  const collectinRef = collection(db, "categories");
+  const collectionRef = collection(db, "categories");
 
-  const q = query(collectinRef);
+  const q = query(collectionRef);
 
   const querySnapshot = await getDocs(q);
 

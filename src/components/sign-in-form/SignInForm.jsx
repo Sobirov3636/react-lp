@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { signInAuthUserWithEmailAndPassword, signInWithGooglePopup } from "../../ulils/firebase/firebase.utils";
 import FormInput from "../form-input/FormInput";
 import Button, { BUTTON_TYPE_CLASSES } from "../button/Button";
-import "./SignInForm.styles.scss";
+import { useNavigate } from "react-router-dom";
+import { ButtonsContainer, SignInContainer } from "./SignInForm.styles.jsx";
 
 const defaultFormFields = {
   email: "",
@@ -11,6 +12,8 @@ const defaultFormFields = {
 
 const SignInForm = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
+
+  const navigate = useNavigate();
 
   const { email, password } = formFields;
 
@@ -27,6 +30,7 @@ const SignInForm = () => {
       await signInAuthUserWithEmailAndPassword(email, password);
       // setCurrentUser(user);
       setFormFields(defaultFormFields);
+      navigate("/");
     } catch (error) {
       if (error.code === "auth/user-not-found") {
         alert("Cannot find user, please check your");
@@ -40,12 +44,11 @@ const SignInForm = () => {
 
   const logGoogleUser = async () => {
     await signInWithGooglePopup();
-    // setCurrentUser(user);
-    // createUserDocumentFromAuth(user);
+    navigate("/");
   };
 
   return (
-    <div className='sign-in-container'>
+    <SignInContainer>
       <h2>Already have an account?</h2>
       <span>Sign in with your email and password</span>
       <form onSubmit={handleSubmit}>
@@ -68,14 +71,14 @@ const SignInForm = () => {
           onChange={handleChange}
           value={password}
         />
-        <div className='buttons-container'>
+        <ButtonsContainer>
           <Button>Sign in</Button>
           <Button buttonTpye={BUTTON_TYPE_CLASSES.google} type='button' onClick={logGoogleUser}>
             Google sign in
           </Button>
-        </div>
+        </ButtonsContainer>
       </form>
-    </div>
+    </SignInContainer>
   );
 };
 
