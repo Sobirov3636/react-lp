@@ -1,9 +1,7 @@
 import { useContext } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { ReactComponent as CrownLogo } from "../assets/crown.svg";
-import { UserContext } from "../contexts/userContext";
 import { signOutUser } from "../ulils/firebase/firebase.utils";
-import CartItem from "../components/CartIcon/CartIcon";
 import CartIcon from "../components/CartIcon/CartIcon";
 import CartDropdown from "../components/CartDropdown/CartDropdown";
 import { CartContext } from "../contexts/cartContext";
@@ -13,6 +11,8 @@ import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 import { ThemeProvider } from "styled-components";
 import { dark, light } from "../Theme.styles";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "../store/user/user.selector";
 
 const themeIconStyle = {
   cursor: "pointer",
@@ -21,7 +21,7 @@ const themeIconStyle = {
 };
 
 const Navigation = () => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
+  const currentUser = useSelector(selectCurrentUser);
   const { isCartOpen } = useContext(CartContext);
 
   const [currentTheme, setcurrentTheme] = useState(() => JSON.parse(localStorage.getItem("theme")) || light);
