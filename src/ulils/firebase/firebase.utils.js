@@ -96,15 +96,9 @@ export const getCategoriesAndDocuments = async function () {
 
   const querySnapshot = await getDocs(q);
 
-  const categoryMap = querySnapshot.docs.reduce(function (sum, docSnapshot) {
-    const { title, items } = docSnapshot.data();
+  const categoryArray = querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 
-    sum[title.toLowerCase()] = items;
-
-    return sum;
-  }, {});
-
-  return categoryMap;
+  return categoryArray;
 
   /*
   
