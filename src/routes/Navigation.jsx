@@ -9,9 +9,10 @@ import { BsFillMoonFill, BsFillSunFill } from "react-icons/bs";
 import { ThemeProvider } from "styled-components";
 import { dark, light } from "../Theme.styles";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { selectCurrentUser } from "../store/user/user.selector";
 import { selectIsCartOpen } from "../store/cart/cart.selector";
+import { signOutStart } from "../store/user/user.action";
 
 const themeIconStyle = {
   cursor: "pointer",
@@ -22,11 +23,12 @@ const themeIconStyle = {
 const Navigation = () => {
   const currentUser = useSelector(selectCurrentUser);
   const isCartOpen = useSelector(selectIsCartOpen);
+  const dispatch = useDispatch();
 
   const [currentTheme, setcurrentTheme] = useState(() => JSON.parse(localStorage.getItem("theme")) || light);
 
-  const signOutHandler = async () => {
-    await signOutUser();
+  const signOutHandler = () => {
+    dispatch(signOutStart());
   };
 
   const handleTheme = (theme) => {

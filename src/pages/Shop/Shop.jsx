@@ -3,17 +3,13 @@ import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 import CategoriesPreview from "../../components/CategoriesPreview/CategoriesPreview";
 import Category from "../../components/Category/Category";
-import { setCategories } from "../../store/categories/category.action";
-import { getCategoriesAndDocuments } from "../../ulils/firebase/firebase.utils";
+import { fetchCategoriesStart } from "../../store/categories/category.action";
 
 const Shop = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    (async function () {
-      const categoriesArray = await getCategoriesAndDocuments();
-      dispatch(setCategories(categoriesArray));
-    })();
+    dispatch(fetchCategoriesStart());
   }, [dispatch]);
 
   return (

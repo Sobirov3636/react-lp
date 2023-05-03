@@ -8,23 +8,15 @@ import Navigation from "./routes/Navigation";
 import Auth from "./pages/Auth/Auth";
 import Shop from "./pages/Shop/Shop";
 import Checkout from "./pages/Checkout/Checkout";
-import { createUserDocumentFromAuth, onAuthStateChangedListner } from "./ulils/firebase/firebase.utils";
 import { useEffect } from "react";
-import { setCurrenUser } from "./store/user/user.action";
+import { checkUserSession } from "./store/user/user.action";
 import { useDispatch } from "react-redux";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChangedListner((user) => {
-      if (user) {
-        createUserDocumentFromAuth(user);
-      }
-      dispatch(setCurrenUser(user));
-    });
-
-    return unsubscribe;
+    dispatch(checkUserSession());
   }, [dispatch]);
 
   return (
